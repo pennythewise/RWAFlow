@@ -1,0 +1,50 @@
+# RWA Flow Tracker — pipeline configuration
+# All secrets come from environment variables / .env — never put keys here.
+
+# --- Dune ---
+# Free API key: https://dune.com/settings/api → put in .env as DUNE_API_KEY
+# After saving each sql/0*.sql query on Dune, paste its query ID below
+# (the number in the Dune URL: dune.com/queries/<id>).
+dune:
+  base_url: "https://api.dune.com/api/v1"
+  # query_id -> output filename under data/raw/
+  queries:
+    # Example — replace with your real query IDs:
+    # daily_transfers_usdc: 1234567
+    # daily_transfers_buidl: 1234568
+    # mints_burns_buidl: 1234569
+    # top_holders_buidl: 1234570
+    # concentration_ousg: 1234571
+  poll_interval_seconds: 10
+  max_wait_seconds: 600
+
+# --- Assets (checksummed, see docs/scope.md) ---
+assets:
+  usdc:
+    symbol: USDC
+    contract: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    decimals: 6
+  buidl:
+    symbol: BUIDL
+    contract: "0x7712c34205737192402172409a8F7ccef8aA2AEc"
+    decimals: 6
+    notes: "Permissioned + rebasing (Securitize). Rebase accrual emits no Transfer events."
+  ousg:
+    symbol: OUSG
+    contract: "0x1B19C19393e2d034D8Ff31ff34c81252FcBbee92"
+    decimals: 18
+  usdy:
+    symbol: USDY
+    contract: "0x96F6eF951840721AdBF46Ac996b59E0235CB985C"
+    decimals: 18
+    optional: true
+
+# --- Local storage ---
+paths:
+  raw_dir: "data/raw"
+  duckdb_path: "data/rwa.duckdb"
+
+# --- Reconciliation tolerance (Phase 1 done-criteria) ---
+# |cumulative mints - burns - onchain totalSupply| / totalSupply
+reconciliation:
+  max_relative_error: 0.05   # 5% — BUIDL rebase drift will exceed this; that's expected, document it
