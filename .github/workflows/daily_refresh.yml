@@ -1,0 +1,36 @@
+name: daily-refresh
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # daily 06:00 UTC
+  workflow_dispatch: {}    # allow manual runs from the Actions tab
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r pipeline/requirements.txt
+
+      - name: Pull Dune results
+        env:
+          DUNE_API_KEY: ${{ secrets.DUNE_API_KEY }}
+        run: python pipeline/dune_pull.py
+
+      - name: Load into DuckDB
+        run: python pipeline/load_duckdb.py
+
+      - name: Upload data artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rwa-data-${{ github.run_id }}
+          path: |
+            data/raw/
+            data/rwa.duckdb
+          retention-days: 30
