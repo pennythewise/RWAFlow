@@ -2,8 +2,6 @@
 
 Public on-chain analytics for tokenized real-world assets on Ethereum: who holds tokenized treasury funds and a major stablecoin, how concentrated supply is, and where mints, burns and transfers come from.
 
-**Live dashboard:** https://pennythewise.github.io/RWAFlow/charts/findings.html
-
 Built as a personal data-engineering project: a Python ETL pipeline (BigQuery `crypto_ethereum` + Routescan API → DuckDB), 43,551 on-chain Transfer events reconstructed into holder balances, concentration and churn metrics, a public findings dashboard, and a set of DuneSQL queries ready for Dune.
 
 ## Headline findings (2025-01 → 2026-11)
@@ -77,7 +75,7 @@ pip install -r pipeline/requirements.txt
 2. **Daily aggregates (all 4 assets):** `.venv/bin/python pipeline/bigquery_pull.py --dry-run` then without `--dry-run`. Needs `gcloud auth application-default login` once.
 3. **Analysis:** `.venv/bin/python pipeline/analyze_holders.py` → `data/raw/top_holders.csv`, `concentration_summary.csv`, `weekly_churn.csv`.
 4. **Load to DuckDB:** `.venv/bin/python pipeline/load_duckdb.py`.
-5. **Dashboard:** `docs/charts/findings.html` is committed — served by GitHub Pages at the link above.
+5. **Dashboard:** `docs/charts/findings.html` is committed — open it locally or serve `docs/` statically to view.
 
 > **Dune note:** Dune's free tier is view-only (verified 2026-11), so the
 > live analysis ran on BigQuery + Routescan instead — same methodology,
@@ -88,11 +86,11 @@ pip install -r pipeline/requirements.txt
 ## Status
 
 - [x] Analysis executed end-to-end (BigQuery + Routescan → DuckDB)
-- [x] Public findings dashboard live (GitHub Pages)
+- [x] Findings dashboard generated (`docs/charts/findings.html`)
 - [x] BigQuery run documented — 277 GiB scanned, real bytes recorded
 - [x] Executive summary + recommendations (`docs/executive_summary.md`)
 - [x] DuneSQL query set written (`sql/`)
-- [ ] Dune dashboard published (optional — needs trial/paid plan)
+- [ ] Public dashboard published (optional)
 - [ ] Top holders labelled with sources (`docs/holder_labels.md` — addresses generated, labels pending)
 - [ ] GraphQL query run (`graphql/` ready, needs `GRAPH_API_KEY`)
 - [ ] Scheduled refresh verified on GitHub Actions
