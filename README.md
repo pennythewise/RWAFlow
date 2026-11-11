@@ -38,13 +38,18 @@ data/        local DuckDB + cached results (gitignored)
 ## Quick start
 
 ```bash
-cp .env.example .env        # fill in keys you have; all steps degrade gracefully without them
-python -m venv .venv && source .venv/bin/activate
+source .venv/bin/activate        # or use .venv/bin/python for every command
 pip install -r pipeline/requirements.txt
 ```
 
-1. **Phase 0–1 (Dune):** paste `sql/00_verify_tables.sql` into Dune first to confirm table names, then each `sql/0*.sql` query. Publish the dashboard publicly from the Dune UI.
-2. **Phase 4 (pipeline):** `python pipeline/dune_pull.py` then `python pipeline/load_duckdb.py` — requires `DUNE_API_KEY` in `.env` and query IDs saved in `pipeline/config.yaml` after you create the queries on Dune.
+> **Dune pricing note (verified 2026-11):** Dune's free tier is now
+> view-only — running queries needs a 7-day trial or paid plan. Published
+> dashboards stay free to view forever. Strategy: build the dashboard
+> during the trial; the Python pipeline uses BigQuery (free) as its data
+> source instead of the Dune API.
+
+1. **Phase 0–1 (Dune):** paste `sql/00_verify_tables.sql` into Dune first to confirm table names, then each `sql/0*.sql` query. Publish the dashboard publicly from the Dune UI. (Or run them via API during the trial: `.venv/bin/python pipeline/run_sql.py sql/00_verify_tables.sql` — needs `DUNE_API_KEY` in `.env`.)
+2. **Phase 4 (pipeline):** `.venv/bin/python pipeline/bigquery_pull.py` (free, no key beyond `gcloud auth`) or `python pipeline/dune_pull.py` during the Dune trial — then `python pipeline/load_duckdb.py`.
 3. **Phase 3 (GraphQL):** `python graphql/run_graphql.py` — uses the public Aave v3 subgraph; set `SUBGRAPH_URL` in `graphql/config` notes inside the script if the endpoint changed.
 4. **Analysis:** open `notebooks/concentration.ipynb` once `data/rwa.duckdb` exists.
 5. **BigQuery:** open `notebooks/bigquery_run.ipynb` — it dry-runs first and prints bytes scanned before spending anything.

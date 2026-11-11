@@ -34,8 +34,14 @@ Address sources (verified 2026-11-11):
 
 ## Phase 0 checklist — run these yourself on Dune
 
-1. Create a free Dune account → new query.
-2. Paste `sql/00_verify_tables.sql`, set the token parameter to USDC, run it.
+> **Trial strategy (decided 2026-11-11):** Dune free tier is view-only;
+> use the 7-day free trial to build + publish the dashboard (public
+> dashboards stay free to view after the trial). Do all query runs inside
+> the trial window. After it ends, the pipeline uses BigQuery, not the
+> Dune API.
+
+1. Create a Dune account → start the free trial.
+2. Paste `sql/00_verify_tables.sql`, run it.
    - If it errors, the spellbook table names have changed — check https://dune.com/data (`tokens` schema) and update the `-- VERIFY:` comments at the top of every `sql/0*.sql` file before continuing.
 3. Run `sql/01_daily_transfers.sql` for each of the 4 contracts (change the `params` token address). Confirm you get non-empty results for at least USDC, BUIDL and OUSG.
 4. Approve/adjust the asset list (e.g. drop USDY if its Dune coverage is thin).
