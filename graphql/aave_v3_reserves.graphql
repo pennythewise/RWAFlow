@@ -1,0 +1,47 @@
+# Aave v3 (Ethereum) — reserve-level query.
+#
+# Purpose (Phase 3): pull protocol-level context that raw token tables
+# don't have — e.g. which reserves exist, their liquidity and rates —
+# then join with Dune holder data in notebooks/ (e.g. "how much USDC
+# sits supplied to Aave" vs. sitting in plain wallets).
+#
+# Subgraph: Aave v3 Ethereum on The Graph decentralized network.
+# Deployment ID below is from the public explorer listing — VERIFY it is
+# still the live/current deployment at
+# https://thegraph.com/explorer/subgraphs (search "Aave v3 Ethereum")
+# before relying on results; subgraph IDs rotate on upgrades.
+#
+# NOTE on scope: BUIDL/OUSG/USDY are NOT Aave collateral, so this query
+# covers the USDC leg of the analysis. That is fine — the join question
+# is "where does the stablecoin leg of RWA activity sit?".
+
+query AaveV3Reserves {
+  reserves(first: 100, orderBy: totalLiquidity, orderDirection: desc) {
+    id
+    symbol
+    decimals
+    totalLiquidity
+    availableLiquidity
+    totalATokenSupply
+    liquidityRate
+    variableBorrowRate
+    stableBorrowRate
+    optimalUsageRatio
+    totalVariableDebt
+    totalStableDebt
+    aTokenAddress
+    stableDebtTokenAddress
+    variableDebtTokenAddress
+    interestRateStrategyAddress
+    reserveConfiguration {
+      decimals
+      ltv
+      liquidationThreshold
+      liquidationBonus
+      reserveFactor
+      usageAsCollateralEnabled
+      borrowingEnabled
+      stableBorrowRateEnabled
+    }
+  }
+}
