@@ -54,7 +54,8 @@ lowercased-then-remixed address may be invalid. Rules we follow:
 
 ## Address labels and metadata
 
-An address is just a number — "Binance hot wallet" is off-chain
+An address is just a number — "Binance hot wallet" or any exchange label
+is off-chain
 knowledge attached by explorers/indexers. This project treats labels as
 **data with provenance**: every label in `docs/holder_labels.md` records
 its source (Nansen, Arkham, Etherscan, manual, or "guess"). On-chain you

@@ -1,14 +1,14 @@
 # Phase 0 — Scope
 
 Date written: 2026-11-11
-Status: **proposed — needs owner approval on Dune** (see checklist below)
+Status: **proposed — pending validation on Dune/BigQuery** (see checklist below)
 
 ## Chosen assets
 
 | Asset | Symbol | Contract (checksummed) | Decimals | Why |
 |---|---|---|---|---|
 | USD Coin | USDC | `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48` | 6 | The dominant stablecoin. Gives a high-volume baseline so RWA metrics can be compared against "normal" token behaviour (exchange flows, DeFi collateral, churn). |
-| BlackRock USD Institutional Digital Liquidity Fund | BUIDL | `0x7712c34205737192402172409a8F7ccef8aA2AEc` | 6 | Largest tokenized treasury fund by market cap (~$2B+ reported late 2025). Issued via Securitize. Institutional distribution story — directly relevant to a Binance BD question. |
+| BlackRock USD Institutional Digital Liquidity Fund | BUIDL | `0x7712c34205737192402172409a8F7ccef8aA2AEc` | 6 | Largest tokenized treasury fund by market cap (~$2B+ reported late 2025). Issued via Securitize. Institutional distribution story. |
 | Ondo Short-Term U.S. Government Bond Fund | OUSG | `0x1B19C19393e2d034D8Ff31ff34c81252FcBbee92` | 18 | Retail-accessible Ondo treasury token with instant mint/redeem. Contrast with BUIDL's permissioned model. |
 | Ondo US Dollar Yield | USDY | `0x96F6eF951840721AdBF46Ac996b59E0235CB985C` | 18 | Optional 4th asset — yield-bearing, non-rebasing design. Include if Phase 1 queries stay cheap; drop if it adds noise. |
 
@@ -30,7 +30,7 @@ Address sources (verified 2026-11-11):
 2. How concentrated is ownership: top 10 share, and who are the top holders?
 3. Are holders sticky or churning: new vs returning wallets per week?
 4. Where does the activity go: exchanges, DeFi collateral, or plain wallets?
-5. What does this mean for a platform like Binance listing or distributing these assets: where is liquidity, who are the natural partners?
+5. What does this mean for a platform listing or distributing these assets: where is liquidity, who are the natural partners?
 
 ## Phase 0 checklist — run these yourself on Dune
 

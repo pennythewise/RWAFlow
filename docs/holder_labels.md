@@ -3,7 +3,8 @@
 > **STATUS: SKIPPED (2026-11-11)** — top-holder addresses are generated
 > below but labels were not researched. The table is kept as the template
 > for completing this step later. Until then, treat all labels as
-> `unknown` and do NOT claim "labelled holders" in CV/write-up materials.
+> `unknown` and do not claim labelled-holder analysis in summaries until
+> the table is filled.
 
 Phase 2 deliverable. For each top holder (from `sql/04_top_holders.sql` /
 `sql/08_where_activity_goes.sql`), record who it is and **where the label
