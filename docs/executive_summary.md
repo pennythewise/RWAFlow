@@ -7,6 +7,20 @@ listing or distributing these assets?*
 > Skeleton — fill every number from a `sql/` query or a notebook cell.
 > No number without a source.
 
+## BigQuery run — completed 2026-11-11
+
+Query: daily ERC-20 Transfer counts for USDC, BUIDL, OUSG, USDY from
+`bigquery-public-data.crypto_ethereum.token_transfers`, 2025-01-01 →
+2026-11-11. Script: `pipeline/bigquery_pull.py`.
+
+- **Bytes scanned: 297,245,555,111 (~277 GiB)** — real number from the
+  job's `total_bytes_processed`, within the 1 TiB/month free tier.
+- **Rows returned: 2,175** daily aggregates → `data/raw/bq_transfers_daily.csv`
+  → `data/rwa.duckdb` (`raw.bq_transfers_daily`).
+- **Result:** 300.6M USDC transfers, 16.8K BUIDL, 21.6K USDY, 1.2K OUSG
+  over the period — quantifies the "permissioned RWA tokens move far less
+  on-chain than the stablecoin" finding.
+
 ## Findings (draft structure)
 
 1. **Supply growth** — [asset]: supply grew X% over the period; growth was
