@@ -1,0 +1,25 @@
+# Planning docs — internal working notes, not for the public repo
+RWA_Flow_Tracker_plan.md
+*_plan.md
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Local data and DuckDB files
+data/
+*.duckdb
+*.duckdb.wal
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
