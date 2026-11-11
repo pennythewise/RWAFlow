@@ -54,9 +54,10 @@ as directionally correct, not exact. This is documented, not hidden.
 ## Recommendations (draft — refine after labels)
 
 1. **Distribution partner:** the concentration data says supply sits in a
-   handful of issuer/custodian wallets — the natural BD targets are the
-   entities already controlling that float (Securitize for BUIDL, Ondo +
-   Coinbase Prime for OUSG), not retail channels.
+   handful of wallets — the natural BD targets are the entities already
+   controlling that float. NOTE: holder identities are unlabelled
+   (`docs/holder_labels.md` skipped) — this recommendation is inferred
+   from structure, not confirmed labels.
 2. **Priority listing candidate:** USDY — only asset with real weekly
    holder churn (~30–45 new wallets/week), suggesting latent retail
    demand that a liquid venue could serve.

@@ -1,5 +1,10 @@
 # Holder labels — RWA Flow Tracker
 
+> **STATUS: SKIPPED (2026-11-11)** — top-holder addresses are generated
+> below but labels were not researched. The table is kept as the template
+> for completing this step later. Until then, treat all labels as
+> `unknown` and do NOT claim "labelled holders" in CV/write-up materials.
+
 Phase 2 deliverable. For each top holder (from `sql/04_top_holders.sql` /
 `sql/08_where_activity_goes.sql`), record who it is and **where the label
 came from**. If a label is a guess, mark it as a guess — rule 4 in
